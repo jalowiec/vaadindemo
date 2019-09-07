@@ -10,6 +10,9 @@ sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://maven.vaadin.com/vaadin-addons"
+    }
 }
 
 ext {
@@ -19,6 +22,7 @@ ext {
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'com.vaadin.tapio', name: 'googlemaps', version: '2.1.0'
 }
 
 dependencyManagement {
