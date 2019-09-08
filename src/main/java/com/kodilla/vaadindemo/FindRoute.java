@@ -1,5 +1,6 @@
 package com.kodilla.vaadindemo;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.icon.Icon;
@@ -17,28 +18,33 @@ import javafx.scene.control.Slider;
 @Route
 public class FindRoute extends VerticalLayout {
 
-    private TextField fromPlace = new TextField();
-    private TextField toPlace= new TextField();
+    private ComboBox fromPlace = new ComboBox("Wybierz punkt wyjazdowy");
+    private ComboBox toPlace= new ComboBox("Wybierz punkt docelowy");
     private ComboBox  carModel = new ComboBox("Wybierz samochód");
+    private Button addCar = new Button("Dodaj samochód", new Icon(VaadinIcon.PLUS));
     private NumberField fuelLevel = new NumberField("Aktualny stan naładowania baterii");
     private RadioButtonGroup driveType = new RadioButtonGroup();
     private Button searchButton = new Button("Szukaj", new Icon(VaadinIcon.SEARCH));
-    private GoogleMap googleMap;
+    private Component mapComponent = new MapComponent();
 
 
     private final String CONTROLS_WIDTH = "250px";
 
     public FindRoute() {
-        fromPlace.setPlaceholder("Wybierz punkt wyjazdowy");
+        fromPlace.setItems("Katowice", "Kraków", "Poznań", "Warszawa");
         fromPlace.setClearButtonVisible(true);
         fromPlace.setWidth(CONTROLS_WIDTH);
 
-        toPlace.setPlaceholder("Wybierz punkt docelowy");
+        toPlace.setItems("Katowice", "Kraków", "Poznań", "Warszawa");
         toPlace.setClearButtonVisible(true);
         toPlace.setWidth(CONTROLS_WIDTH);
 
+
         carModel.setItems("Opel", "Tesla 3", "Tesla 5");
+        toPlace.setClearButtonVisible(true);
         carModel.setWidth(CONTROLS_WIDTH);
+
+        addCar.setWidth(CONTROLS_WIDTH);
 
         fuelLevel.setHasControls(true);
         fuelLevel.setValue(100d);
@@ -51,7 +57,10 @@ public class FindRoute extends VerticalLayout {
         driveType.setItems("Oszczędna", "Standard", "Dynamiczna");
         driveType.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
 
-        add(fromPlace, toPlace, carModel, fuelLevel, driveType, searchButton);
+        searchButton.setWidth(CONTROLS_WIDTH);
+
+
+        add(fromPlace, toPlace, carModel, addCar, fuelLevel, driveType, searchButton, mapComponent);
 
         
     }
