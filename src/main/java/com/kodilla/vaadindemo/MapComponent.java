@@ -9,6 +9,7 @@ import com.vaadin.flow.router.Route;
 
 @Tag("div")
 @HtmlImport("map.html")
+@Route
 public class MapComponent extends Component implements HasText {
 
 

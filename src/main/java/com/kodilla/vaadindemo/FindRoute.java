@@ -1,5 +1,6 @@
 package com.kodilla.vaadindemo;
 
+import com.kodilla.vaadindemo.service.RestTemplateService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -13,10 +14,14 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import javafx.scene.control.Slider;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Route
 public class FindRoute extends VerticalLayout {
+
+    @Autowired
+    RestTemplateService restTemplateService;
 
     private ComboBox fromPlace = new ComboBox("Wybierz punkt wyjazdowy");
     private ComboBox toPlace= new ComboBox("Wybierz punkt docelowy");
@@ -25,7 +30,7 @@ public class FindRoute extends VerticalLayout {
     private NumberField fuelLevel = new NumberField("Aktualny stan naładowania baterii");
     private RadioButtonGroup driveType = new RadioButtonGroup();
     private Button searchButton = new Button("Szukaj", new Icon(VaadinIcon.SEARCH));
-    private Component mapComponent = new MapComponent();
+    private MapComponent mapComponent = new MapComponent();
 
 
     private final String CONTROLS_WIDTH = "250px";
@@ -57,6 +62,7 @@ public class FindRoute extends VerticalLayout {
         driveType.setItems("Oszczędna", "Standard", "Dynamiczna");
         driveType.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
 
+        searchButton.addClickListener(event -> System.out.println(restTemplateService.sendRouteRequest()));
         searchButton.setWidth(CONTROLS_WIDTH);
 
 
