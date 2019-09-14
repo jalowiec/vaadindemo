@@ -12,10 +12,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 
-
-
-
-public class MainView extends VerticalLayout {
+public class MainViewBook extends VerticalLayout {
 
     private BookService bookService = BookService.getInstance();
     private Grid<Book> grid = new Grid<>(Book.class);
@@ -24,7 +21,7 @@ public class MainView extends VerticalLayout {
     private Button addNewBook = new Button("Add new book");
 
 
-    public MainView() {
+    public MainViewBook() {
         filter.setPlaceholder("Filter by title...");
         filter.setClearButtonVisible(true);
         filter.setValueChangeMode(ValueChangeMode.EAGER);

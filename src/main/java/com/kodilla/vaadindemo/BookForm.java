@@ -27,10 +27,10 @@ public class BookForm extends FormLayout {
 
     private BookService service = BookService.getInstance();
 
-    private MainView mainView;
+    private MainViewBook mainViewBook;
 
 
-    public BookForm(MainView mainView) {
+    public BookForm(MainViewBook mainViewBook) {
         type.setItems(BookType.values());
         HorizontalLayout buttons = new HorizontalLayout(save, delete);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -38,21 +38,21 @@ public class BookForm extends FormLayout {
         binder.bindInstanceFields(this);
         save.addClickListener(event -> save());
         delete.addClickListener(event -> delete());
-        this.mainView = mainView;
+        this.mainViewBook = mainViewBook;
     }
 
 
     private void save() {
         Book book = binder.getBean();
         service.save(book);
-        mainView.refresh();
+        mainViewBook.refresh();
         setBook(null);
     }
 
     private void delete() {
         Book book = binder.getBean();
         service.delete(book);
-        mainView.refresh();
+        mainViewBook.refresh();
         setBook(null);
     }
 
